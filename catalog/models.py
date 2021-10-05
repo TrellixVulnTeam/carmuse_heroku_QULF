@@ -122,6 +122,27 @@ class PaintingIndexPage(RoutablePageMixin, Page):
         self.posts = self.get_posts().filter(categories__slug=category)
         return Page.serve(self, request, *args, **kwargs)
 
+    @route(r'^location/(?P<location>[-\w]+)/$')
+    def post_by_location(self, request, location, *args, **kwargs):
+        self.search_type = 'location'
+        self.search_term = location
+        self.posts = self.get_posts().filter(locations__slug=location)
+        return Page.serve(self, request, *args, **kwargs)
+
+    @route(r'^medium/(?P<medium>[-\w]+)/$')
+    def post_by_medium(self, request, medium, *args, **kwargs):
+        self.search_type = 'medium'
+        self.search_term = medium
+        self.posts = self.get_posts().filter(mediums__slug=medium)
+        return Page.serve(self, request, *args, **kwargs)
+
+    @route(r'^support/(?P<support>[-\w]+)/$')
+    def post_by_support(self, request, support, *args, **kwargs):
+        self.search_type = 'support'
+        self.search_term = support
+        self.posts = self.get_posts().filter(supports__slug=support)
+        return Page.serve(self, request, *args, **kwargs)
+
     @route(r'^$')
     def post_list(self, request, *args, **kwargs):
         self.posts = self.get_posts()

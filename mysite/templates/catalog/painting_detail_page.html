@@ -127,11 +127,11 @@ h5, h6 {
                 <!--           Location-->
                 {% with locations=page.locations.all %}
                 {% if locations %}
-                {% for loc in self.locations.all %}
+                {% for location in locations %}
                 <i class='fas fa-globe'></i>
 <!--                <h6>Location</h6>-->
-                <a href="{{ self.get_parent.url }}?location={{ loc.slug }}">
-                {{ loc.name }}
+                <a href="{% routablepageurl painting_index_page 'post_by_location' location.slug %}">
+                {{ location.name }}
             </a>
                 {% endfor %}
                 {% endif %}
@@ -139,18 +139,22 @@ h5, h6 {
 
                 &nbsp;&nbsp;
 <!--                <h6>Technique:</h6>-->
+                {% with mediums=page.mediums.all %}
+                {% if mediums %}
                 <i class='fas fa-paint-brush'></i>
-                {% for med in self.medium.all %}
-                <a href="{{ self.get_parent.url }}?medium={{ med.slug }}">
-                    {{ med.name }}
+                {% for medium in mediums %}
+                <a href="{% routablepageurl painting_index_page 'post_by_medium' medium.slug %}">
+                    {{ medium.name }}
                 </a>
                 sur
-                {% for sup in self.support.all %}
-                <a href="{{ self.get_parent.url }}?support={{ sup.slug }}">
-                    {{ sup.name }}</herf>
+                {% for support in supports %}
+                <a href="{% routablepageurl painting_index_page 'post_by_support' support.slug %}">
+                    {{ support.name }}</herf>
                 </a>
                 {% endfor %}
                 {% endfor %}
+                {% endif %}
+                {% endwith %}
 
             </div>
 

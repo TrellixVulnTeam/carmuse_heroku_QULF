@@ -2,6 +2,9 @@ from urllib.parse import urlparse, urlunparse
 from django.http import QueryDict
 from catalog.models import PaintingCategory as Category #Tag
 from catalog.models import PaintingPageTag as Tag
+from catalog.models import PaintingLocation as Location
+from catalog.models import PaintingLocation as Medium
+from catalog.models import PaintingLocation as Support
 from django.template import Library, loader
 # from blog.md_converter.utils import render_markdown
 
@@ -34,6 +37,16 @@ def tags_list(context):
     }
 
 
+@register.inclusion_tag("catalog/components/painting_tags_list.html", takes_context=True)
+def painting_tags_list(context):
+    page = context["page"]
+    painting_tags = page.tags.all()
+    return {
+        "request": context["request"],
+        "painting_tags": painting_tags,
+    }
+
+
 @register.inclusion_tag('catalog/components/categories_list.html',
                         takes_context=True)
 def categories_list(context):
@@ -43,7 +56,6 @@ def categories_list(context):
         'painting_index_page': context['painting_index_page'],
         'categories': categories
     }
-
 
 
 @register.inclusion_tag("catalog/components/painting_categories_list.html", takes_context=True)
@@ -56,14 +68,66 @@ def painting_categories_list(context):
     }
 
 
-@register.inclusion_tag("catalog/components/painting_tags_list.html", takes_context=True)
-def painting_tags_list(context):
+@register.inclusion_tag('catalog/components/locations_list.html',
+                        takes_context=True)
+def locations_list(context):
+    locations = Location.objects.all()
+    return {
+        'request': context['request'],
+        'painting_index_page': context['painting_index_page'],
+        'locations': locations
+    }
+
+
+@register.inclusion_tag("catalog/components/painting_locations_list.html", takes_context=True)
+def painting_locations_list(context):
     page = context["page"]
-    painting_tags = page.tags.all()
+    locations = page.painting_locations.all()
     return {
         "request": context["request"],
-        "painting_tags": painting_tags,
+        "locations": locations,
     }
+
+@register.inclusion_tag('catalog/components/mediums_list.html',
+                        takes_context=True)
+def mediums_list(context):
+    mediums = Medium.objects.all()
+    return {
+        'request': context['request'],
+        'painting_index_page': context['painting_index_page'],
+        'mediums': mediums
+    }
+
+
+@register.inclusion_tag("catalog/components/painting_mediums_list.html", takes_context=True)
+def painting_mediums_list(context):
+    page = context["page"]
+    mediums = page.painting_mediums.all()
+    return {
+        "request": context["request"],
+        "mediums": mediums,
+    }
+
+@register.inclusion_tag('catalog/components/supports_list.html',
+                        takes_context=True)
+def supports_list(context):
+    supports = Support.objects.all()
+    return {
+        'request': context['request'],
+        'painting_index_page': context['painting_index_page'],
+        'supports': supports
+    }
+
+
+@register.inclusion_tag("catalog/components/painting_supports_list.html", takes_context=True)
+def painting_supports_list(context):
+    page = context["page"]
+    supports = page.painting_supports.all()
+    return {
+        "request": context["request"],
+        "supports": supports,
+    }
+
 
 #
 # @register.simple_tag
