@@ -112,7 +112,7 @@ import dj_database_url
 
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
-DATABASE_URL="sqlite://./db.sqlite3"
+#DATABASE_URL="sqlite://./db.sqlite3"
 #DATABASE_URL="sqlite3:////db" # postgres://postgres@database_default:5432/db
 # DATABASE_URL = os.environ.get('DATABASE_URL')
 
