@@ -1,7 +1,5 @@
 Django>=3.2,<3.3
 wagtail>=2.14,<2.15
-
-psycopg2-binary
 django-extensions==3.1.0
 
 wagtail-markdown==0.6
@@ -19,3 +17,6 @@ wagtailfontawesome
 django_widget_tweaks
 gunicorn
 wagtail_blocks
+dj_database_url
+django-environ
+psycopg2-binary
