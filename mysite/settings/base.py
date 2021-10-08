@@ -149,7 +149,7 @@ DATABASES = {
         'NAME': 'dbcar',
         'USER': 'caruser',
         'PASSWORD': '2020',
-        'HOST': '127.0.0.1',
+        'HOST': '',
         'PORT': '5432',
     }
 }
