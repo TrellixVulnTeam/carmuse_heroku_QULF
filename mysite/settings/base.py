@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import sys
+import dj_database_url
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -117,12 +119,16 @@ DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 # DATABASE_URL = os.environ.get('DATABASE_URL')
 
 # if DEVELOPMENT_MODE is True:
-#     DATABASES = {
-#         "default": {
-#             "ENGINE": "django.db.backends.sqlite3",
-#             "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-#         }
-#     }
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.postgresql',
+    #         'NAME': 'dbcar',
+    #         'USER': 'caruser',
+    #         'PASSWORD': '2020',
+    #         'HOST': '127.0.0.1',
+    #         'PORT': '5432',
+    #     }
+    # }
 # elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
 #     if os.getenv("DATABASE_URL", None) is None:
 #         raise Exception("DATABASE_URL environment variable not defined")
