@@ -8,7 +8,7 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 #ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = os.getenv("127.0.0.1,localhost", "carmuse-do-o5jq9.ondigitalocean.app").split(",")
+ALLOWED_HOSTS = os.getenv["*"]
 # try:
 #     from .local import *
 # except ImportError:
