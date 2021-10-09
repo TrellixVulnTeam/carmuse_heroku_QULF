@@ -21,3 +21,4 @@ dj_database_url
 django-environ
 psycopg2-binary
 wagtail-blocks
+django-dbbackup

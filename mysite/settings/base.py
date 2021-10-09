@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'wagtailfontawesome',
     'widget_tweaks',
     'wagtail_blocks',
+    'dbbackup',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -149,7 +150,7 @@ DATABASES = {
         'NAME': 'dbcar',
         'USER': 'caruser',
         'PASSWORD': '2020',
-        'HOST': '',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
@@ -235,3 +236,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # USERAUTH
 #AUTH_USER_MODEL = 'userauth.CustomUser'
+
+
+#DB BACKUPS
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': os.path.join(BASE_DIR, '../backups')}
