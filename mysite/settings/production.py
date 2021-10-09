@@ -9,7 +9,7 @@ SECRET_KEY = 'django-insecure-wt2^elcpvn+a-aa7exnt92ak#l%yozhx+!el^^g1o&z246vyyb
 
 #ALLOWED_HOSTS = ['*']
 #ALLOWED_HOSTS = os.getenv["*"]
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1").split(",")
 # try:
 #     from .local import *
 # except ImportError:
