@@ -113,7 +113,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 import sys
 import dj_database_url
 
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
+# DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
 #DATABASE_URL="sqlite://./db.sqlite3"
 #DATABASE_URL="sqlite3:////db" # postgres://postgres@database_default:5432/db
