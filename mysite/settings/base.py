@@ -29,11 +29,12 @@ INSTALLED_APPS = [
     'home',
     'search',
 
+    'about',
     'blog',
     'catalog',
     'contact',
     'expo',
-    #'flex',
+    'flex',
     'menus',
     'painter',
     'streams',
