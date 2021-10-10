@@ -44,6 +44,7 @@
                         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                     </li>
 
+                    {#% include "menus/main_menu.html" %#}
 
                         {% for item in navigation.menu_items.all %}
                             <li>
@@ -89,7 +90,7 @@
           </nav>
 
 
-        {% include "menus/main_menu.html" %}
+        {#% include "menus/main_menu.html" %#}
         {#% include "menus/footer.html" %#}
 
 
