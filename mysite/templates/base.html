@@ -58,38 +58,37 @@
 
                     </li>
                 </ul>
-
-<form action="{% url 'search' %}" method="get">
-        <input type="text" name="query" value="{{ search_query }}">
-        <input type="submit" value="Search">
-    </form>
-<!--                <form class="form-inline my-2 my-lg-0">-->
-<!--                <input class="form-control mr-sm-2" type="text" placeholder="Search">-->
-<!--                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>-->
-<!--              </form>-->
-
-                {% if search_results %}
-        <ul>
-            {% for result in search_results %}
-                <li>
-                    <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
-                    {% if result.search_description %}
-                        {{ result.search_description|safe }}
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-    {% elif search_query %}
-        No results found
-    {% else %}
-        Please type something into the search box
-    {% endif %}
-
+{% include "search/search_box.html" %}
 
             </div>
           </nav>
 
+<!--    {% if search_results %}-->
+<!--        <ul>-->
+<!--            {% for result in search_results %}-->
+<!--                <li>-->
+<!--                    <h4 style="margin-top:50px"><a href="{% pageurl result %}">{{ result }}</a></h4>-->
+<!--                    {% if result.search_description %}-->
+<!--                        {{ result.search_description }}-->
+<!--                    {% endif %}-->
+<!--                </li>-->
+<!--            {% endfor %}-->
+<!--        </ul>-->
 
+<!--        {% if search_results.has_previous %}-->
+<!--            <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>-->
+<!--        {% endif %}-->
+
+<!--        {% if search_results.has_next %}-->
+<!--            <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>-->
+<!--        {% endif %}-->
+<!--    {% elif search_query %}-->
+<!--        No results found-->
+<!--    {% endif %}-->
+
+
+
+        {#% include "search/search.html" %#}
         {#% include "menus/main_menu.html" %#}
         {#% include "menus/footer.html" %#}
 
