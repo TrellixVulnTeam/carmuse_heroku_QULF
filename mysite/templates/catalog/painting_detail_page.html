@@ -196,14 +196,17 @@ h5, h6 {
                 <h6>Tags:</h6>
                 <br>
         {% if page.tags.count %}
-        {% for tag in page.tags.all %}
+        {% for tag in tags %}
         {# Loop through all the existing tags #}
-        <a href="{{ self.get_parent.url }}?tag={{ tag.slug }}">{{ tag }}</a>&nbsp;&nbsp;
+            <a href="{% routablepageurl painting_index_page 'post_by_tag' tag%}">
+
+        {{ tag }}</a>&nbsp;&nbsp;
         {% endfor %}
         {% endif %}
         {% endif %}
         {% endwith %}
            </div>
+
 
             <br>
             <div class="tags">
