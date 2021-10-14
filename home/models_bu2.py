@@ -3,7 +3,6 @@ from django.shortcuts import render
 from django_extensions.db.fields import AutoSlugField
 from wagtail.snippets.models import register_snippet
 
-from wagtail.core.fields import RichTextField
 from wagtail.core.blocks import CharBlock, PageChooserBlock
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField, StreamField
@@ -45,24 +44,12 @@ class HomePage(RoutablePageMixin, Page):
     template = "home/home_page.html"
     max_count = 1
 
-
-    teaser =RichTextField(null=True, blank=True, features=["bold", "italic"])
-    sub_teaser = RichTextField(null=True, blank=True, features=['h4', 'h5', 'h6', "bold", "italic"])
-    cover_image =models.ForeignKey(
-        "wagtailimages.Image",
-        null=True,
-        blank=False,
-        on_delete=models.SET_NULL,
-        related_name="+",
+    cover = StreamField(
+        [('cover', blocks.CoverImageBlock())]
     )
 
-
-    #cover = StreamField(
-    #    [('cover', blocks.CoverImageBlock(null=True, blank=True))]
-    #)
-
-    banner_title = models.CharField(null=True, blank=True, max_length=100)
-    banner_subtitle = RichTextField(null=True, blank=True, features=["bold", "italic"])
+    banner_title = models.CharField(max_length=100, blank=False, null=True)
+    banner_subtitle = RichTextField(features=["bold", "italic"])
     banner_image = models.ForeignKey(
         "wagtailimages.Image",
         null=True,
@@ -87,6 +74,13 @@ class HomePage(RoutablePageMixin, Page):
     )
 
     content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [
+                StreamFieldPanel('cover'),
+            ],
+                heading="Cover",
+                classname="collapsible collapsed",
+        ),
 
         MultiFieldPanel(
             [
@@ -99,15 +93,7 @@ class HomePage(RoutablePageMixin, Page):
             classname="collapsible collapsed",
         ),
 
-        MultiFieldPanel(
-            [
-                FieldPanel("teaser"),
-                FieldPanel("sub_teaser"),
-                ImageChooserPanel("cover_image"),
-            ],
-            heading="Cover Image",
-            classname="collapsible collapsed",
-        ),
+        StreamFieldPanel("content"),
 
         MultiFieldPanel(
                 [InlinePanel("carousel_images", max_num=5, min_num=0, label="Image")],
