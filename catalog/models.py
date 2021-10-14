@@ -29,6 +29,28 @@ from streams import blocks
 # ATTRIBUTES
 
 # CATEGORY
+class PaintingPagePaintingCategory(models.Model):
+    page = ParentalKey(
+        "catalog.PaintingDetailPage", on_delete=models.CASCADE, related_name="categories"
+    )
+    painting_category = models.ForeignKey(
+        "catalog.PaintingCategory", on_delete=models.CASCADE, related_name="post_pages"
+    )
+
+    panels = [
+        SnippetChooserPanel("painting_category"),
+    ]
+
+    class Meta:
+        unique_together = ("page", "painting_category")
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['painting_index_page'] = self.get_parent().specific
+        return context
+
+
+
 class PaintingCategory(models.Model):
     """Painting catgory for a snippet."""
 
@@ -190,7 +212,7 @@ class PaintingDetailPage(Page):
     height = models.FloatField(null=True, blank=True)
     motif = ChoiceBlock(choices=MOTIF_TYPES, help_text='The subject-matter')
     tags = ClusterTaggableManager(through="catalog.PaintingPageTag", blank=True)
-    categories = ParentalManyToManyField("catalog.PaintingCategory", blank=True)
+    #categories = ParentalManyToManyField("catalog.PaintingCategory", blank=True)
     locations = ParentalManyToManyField("catalog.PaintingLocation", blank=True)
     mediums = ParentalManyToManyField("catalog.PaintingMedium", blank=True)
     supports = ParentalManyToManyField("catalog.PaintingSupport", blank=True)
@@ -242,14 +264,15 @@ class PaintingDetailPage(Page):
         #    [StreamFieldPanel('technical_details')]
         # ),
         FieldPanel("tags"),
+        InlinePanel("categories", label="category"),
 
-        MultiFieldPanel(
-            [
-                FieldPanel("categories", widget=forms.CheckboxSelectMultiple)
-            ],
-            heading="Categories",
-            classname="collapsible collapsed",
-        ),
+        # MultiFieldPanel(
+        #     [
+        #         FieldPanel("categories", widget=forms.CheckboxSelectMultiple)
+        #     ],
+        #     heading="Categories",
+        #     classname="collapsible collapsed",
+        # ),
 
         MultiFieldPanel([
             FieldPanel('locations', widget=forms.CheckboxSelectMultiple),
