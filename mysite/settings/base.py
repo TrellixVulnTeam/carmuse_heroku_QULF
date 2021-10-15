@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'menus',
     'painter',
     'streams',
-    #'userauth',
+    'userauth',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.modeladmin',
@@ -235,8 +235,8 @@ NOCAPTCHA = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# USERAUTH
-#AUTH_USER_MODEL = 'userauth.CustomUser'
+#USERAUTH
+AUTH_USER_MODEL = 'userauth.CustomUser'
 
 
 #DB BACKUPS
